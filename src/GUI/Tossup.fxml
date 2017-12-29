@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller_Tossup">
+   <children>
+      <GridPane hgap="10.0" layoutX="200.0" layoutY="199.0" prefHeight="600.0" prefWidth="800.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.5999755859375" minWidth="10.0" prefWidth="148.800048828125" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.199951171875" minWidth="10.0" prefWidth="435.199951171875" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.199951171875" minWidth="10.0" prefWidth="152.5999755859375" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFEDB;" GridPane.columnIndex="1">
+               <children>
+                  <Text layoutX="122.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tossup #&lt;number&gt;" AnchorPane.topAnchor="28.0">
+                     <font>
+                        <Font name="Monospaced Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <TextArea editable="false" layoutX="34.0" layoutY="68.0" prefHeight="312.0" prefWidth="386.0" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="75.0" />
+                  <Button fx:id="button_noAnswer" layoutX="159.0" layoutY="504.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="108.0" text="No Answer" AnchorPane.bottomAnchor="11.0" />
+                  <Button layoutX="48.0" layoutY="504.0" mnemonicParsing="false" text="Previous" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" />
+                  <Button layoutX="342.0" layoutY="517.0" mnemonicParsing="false" text="Challenge" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <TextArea layoutX="25.0" layoutY="376.0" prefHeight="105.0" prefWidth="386.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutX="82.0" layoutY="44.0" prefHeight="580.0" prefWidth="210.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="143.0" prefWidth="210.0" style="-fx-background-color: #FFFEDB;">
+                           <children>
+                              <Text layoutX="76.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Team1&gt;" />
+                              <Text layoutX="79.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: #FFFEDB;">
+                           <children>
+                              <Text layoutX="46.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;PlayerName&gt;" />
+                              <Button layoutX="13.0" layoutY="8.0" mnemonicParsing="false" text="-" />
+                              <Button layoutX="132.0" layoutY="9.0" mnemonicParsing="false" text="+" />
+                              <Button layoutX="170.0" layoutY="9.0" mnemonicParsing="false" text="++" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <VBox layoutX="31.0" layoutY="79.0" prefHeight="580.0" prefWidth="214.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="143.0" prefWidth="210.0" style="-fx-background-color: #FFFEDB;">
+                           <children>
+                              <Text layoutX="81.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;Team2&gt;" />
+                              <Text layoutX="81.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50">
+                                 <font>
+                                    <Font size="48.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+         </children>
+      </GridPane>
+      <MenuBar prefHeight="25.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Export" />
+              <MenuItem fx:id="menuItem_close" mnemonicParsing="false" onAction="#close" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Edit Teams" />
+                  <MenuItem mnemonicParsing="false" text="Edit Players" />
+                  <MenuItem mnemonicParsing="false" text="Edit Packets" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Manual" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
