@@ -13,12 +13,15 @@ public class Main extends Application {
 		try { 
 			
 			FXMLLoader loader =  new FXMLLoader(getClass().getResource("/GUI/RootMenu.fxml"));
-			
+	    	
 	        Parent root = loader.load();
+	        Controller controller = loader.getController(); 
+	    	controller.setStats(new Tournament_Info());
 	        
 			Scene scene = new Scene(root,900,600);
+			// Will implement CSS later. -- OT
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setTitle("Quiz Bowl Auto Score Was Changed");
+			primaryStage.setTitle("Quiz Bowl Auto Score");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
