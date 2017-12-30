@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +23,7 @@ public class Controller {
     @FXML
     private Button button_savedTournaments;
 
-    private void popup(String scenePath, Stage curStage) {
+    protected void popup(String scenePath, Stage curStage) {
     	try {
     		Parent root = FXMLLoader.load(getClass().getResource(scenePath));
     		Scene newScene = new Scene(root); 
@@ -34,6 +36,27 @@ public class Controller {
     	} catch (Exception e) {
     		e.printStackTrace(); 
     	}
+    }
+    
+    protected void changeScene(String scenePath, Stage curStage) throws IOException {
+    	
+    	Parent root = FXMLLoader.load(getClass().getResource(scenePath));
+    	Scene newScene = new Scene(root); 
+    	
+    	curStage.setScene(newScene);
+    	curStage.show(); 
+    	
+    }
+    
+    protected void closePopup(String scenePath, Stage curStage) throws IOException {
+    	
+    	Parent root = FXMLLoader.load(getClass().getResource(scenePath));
+    	Scene newScene = new Scene(root, 900, 600); 
+    	Stage ownerStage = (Stage)curStage.getOwner(); 	
+    	ownerStage.setScene(newScene);
+    	ownerStage.show(); 
+    	curStage.hide(); 
+    	
     }
     
     @FXML

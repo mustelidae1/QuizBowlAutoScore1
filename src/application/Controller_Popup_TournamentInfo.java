@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class Controller_Popup_TournamentInfo {
+public class Controller_Popup_TournamentInfo extends Controller {
 
     @FXML
     private TextField textField_tourneyName;
@@ -24,21 +26,9 @@ public class Controller_Popup_TournamentInfo {
 
     @FXML
     private Button button_next;
-
-    private void changeScene(String scenePath, Stage curStage) {
-    	try {
-    		Parent root = FXMLLoader.load(getClass().getResource(scenePath));
-    		Scene newScene = new Scene(root); 
-    		
-    		curStage.setScene(newScene);
-    		curStage.show(); 
-    	} catch (Exception e) {
-    		e.printStackTrace(); 
-    	}
-    }
     
     @FXML
-    void next(ActionEvent event) {
+    void next(ActionEvent event) throws IOException {
     	Stage curStage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	changeScene("/GUI/Popup_TeamList.fxml", curStage); 
     }
