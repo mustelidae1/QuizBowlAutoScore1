@@ -23,8 +23,6 @@ public class Controller {
     @FXML
     private Button button_savedTournaments;
     
-    //private ApplicationViewState viewState; 
-    
     protected Tournament_Info stats; 
     
     protected void setStats(Tournament_Info newStats) {
@@ -98,6 +96,7 @@ public class Controller {
     public void loadData() {}
     
     // ******* MAIN MENU BUTTON EVENT HANDLERS ***********// 
+    
     @FXML
     void newRound(ActionEvent event) throws IOException {
     	Stage curStage = (Stage)((Node)event.getSource()).getScene().getWindow();
