@@ -29,7 +29,7 @@ public class Schedule_Generator {
 	public String getScheduleRoom(int room) {
 		String retVal = ""; 
 		for (int i = 0; i < numRounds; i++) {
-			retVal += ((i + 1) + ". " + schedule[room][i] + "\n"); 
+			retVal += ((i + 1) + ". " + schedule[room][i] + "\r\n"); 
 		}
 		return retVal; 
 	}

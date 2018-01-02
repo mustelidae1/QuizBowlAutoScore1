@@ -1,6 +1,14 @@
 package application;
 
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +27,9 @@ public class Controller_Home_Tournament extends Controller {
     
     @FXML 
     private Button button_moreTeam; 
+    
+    @FXML 
+    private Button button_print; 
     
     @FXML 
     private AnchorPane schedulePane; 
@@ -46,6 +57,26 @@ public class Controller_Home_Tournament extends Controller {
     void close(ActionEvent event) throws IOException {
     	Stage curStage = (Stage)button_moreTeam.getScene().getWindow();
     	changeScene("/GUI/RootMenu.fxml", curStage); 
+    }
+    
+    @FXML
+    void printSchedule(ActionEvent event) {
+    	File file = new File("schedule.txt");
+    	try {
+			file.createNewFile();
+			FileOutputStream is = new FileOutputStream(file);
+            OutputStreamWriter osw = new OutputStreamWriter(is);    
+            Writer w = new BufferedWriter(osw);
+            for (int i = 0; i < stats.getNumRooms(); i++) {
+            	w.write("Room " + (i+1) + ":\r\n");
+            	w.write(stats.getSchedule().getScheduleRoom(i) + "\r\n");
+            }
+            w.close();
+            Desktop desktop = Desktop.getDesktop();
+            if(file.exists()) desktop.open(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
 }
