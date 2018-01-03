@@ -12,11 +12,13 @@ public class TextStripperUnderline extends PDFTextStripper
     private int answerMatchIndex;
     private int numCharsPrinted;
     private boolean answerFound;
+    private int pageIndex = 0;
     private float startX;
     private float startY;
     private float pageWidth;
     private float answerHeight;
     private float pageHeight;
+    private float previousY;
     private ArrayList<AnswerPosition> answerPositions;
 
     private int tempCharCount;
@@ -39,7 +41,7 @@ public class TextStripperUnderline extends PDFTextStripper
     {
         if(answerFound)
         {
-            answerPositions.add(new AnswerPosition(startX, startY, pageWidth, answerHeight, pageHeight));
+            answerPositions.add(new AnswerPosition(startX, startY, pageWidth, answerHeight, pageHeight, pageIndex));
             answerFound = false;
         }
 
@@ -56,11 +58,11 @@ public class TextStripperUnderline extends PDFTextStripper
             answerMatchIndex++;
             if(answerMatchIndex == TARGET_ANSWER_TEXT.length()) //Finished a complete match
             {
-//                startX = text.getX();
-//                startY = text.getY();
-//                pageWidth = text.getPageWidth();
-//                answerHeight = text.getHeight();
-//                pageHeight = text.getPageHeight();
+                if(startY < previousY) //Semi-hacky way of determining if New page
+                {
+                    pageIndex++;
+                }
+                previousY = startY;
                 answerFound = true;
                 answerMatchIndex = 0;
             }
@@ -69,8 +71,7 @@ public class TextStripperUnderline extends PDFTextStripper
         {
             answerMatchIndex = 0;
         }
-        super.processTextPosition(text
-        );
+        super.processTextPosition(text);
     }
 
     public ArrayList<AnswerPosition> getAnswerPositions()

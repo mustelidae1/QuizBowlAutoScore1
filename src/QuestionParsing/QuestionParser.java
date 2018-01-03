@@ -69,7 +69,7 @@ public class QuestionParser
     {
         AnswerPosition pos = underlineStripper.getAnswerPositions().get(index);
 
-        PDPage page = doc.getPage(0);
+        PDPage page = doc.getPage(pos.getPageIndex());
         float captureWidth = pos.getPageWidth() - pos.getStartX();
         float calcY = pos.getBottomToTopY() - pos.getAnswerHeight();
         page.setCropBox(new PDRectangle(pos.getStartX(), pos.getBottomToTopY() - 3, pos.getPageWidth(), (int) (pos.getAnswerHeight() * 2)));
