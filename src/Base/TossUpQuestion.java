@@ -1,6 +1,11 @@
 package Base;
 
 import javafx.scene.image.Image;
+import org.w3c.dom.Document;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class TossUpQuestion extends Question
 {
@@ -118,5 +123,6 @@ public class TossUpQuestion extends Question
         {
             this.attemptResult = attemptResult;
         }
+
     }
 }

@@ -11,6 +11,7 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
+import javax.print.DocFlavor;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,9 +21,10 @@ import java.util.ArrayList;
 public class QuestionParser
 {
     public ArrayList<TossUpQuestion> tossUps;
-    public ArrayList<Question> bonuses;
+    public ArrayList<BonusQuestion> bonuses;
     private static TextStripperUnderline underlineStripper;
     private static PDDocument doc;
+    private static int numTossups;
 
     public QuestionParser(String filepath) throws FileNotFoundException, IOException
     {
@@ -35,6 +37,7 @@ public class QuestionParser
         String text = underlineStripper.getText(doc);
 
         parseStringForTossUps(text, tossUps);
+        parseStringForBonuses(text, bonuses);
         doc.close();
     }
 
@@ -44,25 +47,83 @@ public class QuestionParser
         int i = 1;
         while(hasQuestions)
         {
-            int nextQuestionLocation = text.indexOf("\n" + i + ".");
+            int nextQuestionLocation = text.indexOf("\n" + i + "."); //TODO: Increment index each time to reduce search distance (Schmell the Painter problem)
             if(nextQuestionLocation == -1)
+            {
+                numTossups = i - 1;
+                hasQuestions = false;
+            }
+            else
+            {
+                int nextQuestionEnd = text.indexOf("answer:", nextQuestionLocation); //TODO: Support capitalization
+                String questionString = text.substring(nextQuestionLocation, nextQuestionEnd);
+                questionString = Utility.stripExtraWhitespace(questionString);
+                questionList.add(new TossUpQuestion(questionString, getAnswerImage(i - 1)));
+                i++;
+            }
+        }
+    }
+
+    private static void parseStringForBonuses(String text, ArrayList<BonusQuestion> questionList) throws IOException
+    {
+        String trimmedText = text.substring(text.indexOf("Bonuses"), text.length()); //TODO: Make this more robust
+        boolean hasQuestions = true;
+        int i = 1;
+        while(hasQuestions)
+        {
+            int nextBonusLocation = trimmedText.indexOf("\n" + i + ".");
+            if(nextBonusLocation == -1)
             {
                 hasQuestions = false;
             }
             else
             {
-                int nextQuestionEnd = text.indexOf("answer:", nextQuestionLocation);
-                int nextAnswerEnd = text.indexOf("\n", nextQuestionEnd);
-                String questionString = text.substring(nextQuestionLocation, nextQuestionEnd);
-                questionString = Utility.stripExtraWhitespace(questionString);
-                String answerString = text.substring(nextQuestionEnd + 8, nextAnswerEnd);
-                answerString = Utility.stripExtraWhitespace(answerString);
+                int nextBonusEnd = trimmedText.indexOf("\n" + (i + 1) + ".");
+                nextBonusEnd = nextBonusEnd == -1 ? trimmedText.length() : nextBonusEnd; //Set to end of text if next question not found
+                String bonusString = trimmedText.substring(nextBonusLocation, nextBonusEnd);
+                String[] questionParts = getBonusParts(bonusString);
+                Image[] answerParts = getBonusImages(i - 1);
 
+                BonusQuestion bonus = new BonusQuestion(questionParts, answerParts);
+                questionList.add(bonus);
+            }
+            i++;
+        }
+    }
 
-                questionList.add(new TossUpQuestion(questionString, getAnswerImage(i - 1)));
-                i++;
+    private static String[] getBonusParts(String bonusText)
+    {
+        String[] output = new String[3];
+        String[] identifiers = {"", "\nb.", "\nc."};
+        for(int i = 0; i < output.length; i++)
+        {
+            String identifier = identifiers[i];
+            int partStart = bonusText.toLowerCase().indexOf(identifier);
+            partStart = (i == 0) ? 0 : partStart; //Part starts at 0 for first question
+            int partEnd = bonusText.toLowerCase().indexOf("answer:");
+            output[i] = bonusText.substring(partStart, partEnd);
+            bonusText = bonusText.substring(partEnd + 7, bonusText.length()); //Trim up to and including occurrence of "answer: "
+        }
+
+        return output;
+    }
+
+    private static Image[] getBonusImages(int bonusIndex)
+    {
+        Image[] output = new Image[3];
+        for(int i = 0; i < output.length; i++)
+        {
+            try
+            {
+                output[i] = getAnswerImage(numTossups + (bonusIndex * 3) + i);
+            }
+            catch (IOException e)
+            {
+                System.err.println("Couldn't get answer image in getBonusImages.");
             }
         }
+
+        return  output;
     }
 
     private static Image getAnswerImage(int index) throws IOException
@@ -70,8 +131,6 @@ public class QuestionParser
         AnswerPosition pos = underlineStripper.getAnswerPositions().get(index);
 
         PDPage page = doc.getPage(pos.getPageIndex());
-        float captureWidth = pos.getPageWidth() - pos.getStartX();
-        float calcY = pos.getBottomToTopY() - pos.getAnswerHeight();
         page.setCropBox(new PDRectangle(pos.getStartX(), pos.getBottomToTopY() - 3, pos.getPageWidth(), (int) (pos.getAnswerHeight() * 2)));
 
         PDDocument croppedDocument = new PDDocument();
