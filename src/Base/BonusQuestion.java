@@ -4,22 +4,22 @@ import javafx.scene.image.Image;
 
 public class BonusQuestion
 {
-    String partBodies[];
-    Image partAnswers[];
+    BonusQuestionPart[] questionParts;
 
     public BonusQuestion(String bodies[], Image[] answers)
     {
-        this.partBodies = bodies;
-        this.partAnswers = answers;
+        questionParts = new BonusQuestionPart[3];
+
+        for(int i = 0; i < questionParts.length; i++)
+        {
+            questionParts[i] = new BonusQuestionPart(bodies[i], answers[i]);
+        }
     }
 
-    public String getPartBody(int index)
+    public BonusQuestionPart getPart(int index)
     {
-        return partBodies[index];
+        return questionParts[index];
     }
 
-    public Image getPartAnswer(int index)
-    {
-        return partAnswers[index];
-    }
+
 }

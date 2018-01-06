@@ -11,10 +11,14 @@ public class TossUpQuestion extends Question
 {
     private TossUpAnswerAttempt firstAnswerAttempt;
     private TossUpAnswerAttempt secondAnswerAttempt;
+    private BonusQuestion bonusQuestion;
+    private int bonusIndex;
+    private boolean hasBonus;
 
     public TossUpQuestion(String body, Image answerImage)
     {
         super(body, answerImage);
+        hasBonus = false;
     }
 
     public TossUpAnswerAttempt getTeamAnswerAttempt(int teamIndex)
@@ -65,8 +69,35 @@ public class TossUpQuestion extends Question
         }
         setAttempted(true);
         this.secondAnswerAttempt = secondAnswerAttempt;
-        setCorrectlyAnswered(firstAnswerAttempt.correct);
+        setCorrectlyAnswered(secondAnswerAttempt.correct);
         GameController.updateTeamScores();
+    }
+
+    public void setBonusQuestion(BonusQuestion question, int bonusIndex)
+    {
+        this.bonusQuestion = question;
+        this.bonusIndex = bonusIndex;
+        this.hasBonus = true;
+    }
+
+    public BonusQuestion getBonusQuestion()
+    {
+        if(bonusQuestion == null)
+        {
+            System.err.println("TossUpQuestion's BonusQuestion has not been set.");
+            return null;
+        }
+        return bonusQuestion;
+    }
+
+    public int getBonusIndex()
+    {
+        return bonusIndex;
+    }
+
+    public boolean hasBonus()
+    {
+        return  hasBonus;
     }
 
     public static class TossUpAnswerAttempt

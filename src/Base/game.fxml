@@ -45,7 +45,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ChoiceBox fx:id="questionChoiceBox" onAction="#handleChangedQuestions" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="questionChoiceBox" onAction="#handleChangedQuestion" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="questionPartChoiceBox" onAction="#handleChangedQuestion" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </top>

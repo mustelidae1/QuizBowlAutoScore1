@@ -28,6 +28,7 @@ public class GameController
     @FXML private TextArea questionText;
     @FXML private ImageView answerImageView;
     @FXML private ChoiceBox questionChoiceBox;
+    @FXML private ChoiceBox questionPartChoiceBox;
     @FXML private BorderPane baseBorderPane;
 
     public NumberBinding team1Score;
@@ -48,11 +49,11 @@ public class GameController
     public void loadGame(Game game)
     {
         this.game = game;
-        if(game.getTossups().size() > 0)
-        {
-            setNumQuestions(game.getTossups().size());
-            questionsSet = true;
-        }
+//        if(game.getTossups().size() > 0)
+//        {
+//            setChoiceBoxQuestions(game.getTossups().size());
+//            questionsSet = true;
+//        }
 
         team1Score = game.getTeamScoreProperty(0).add(0);
         team1Prop = game.getTeamScoreProperty(0);
@@ -66,6 +67,11 @@ public class GameController
         homeBuilder.getTeam2ScoreLabel().textProperty().bind(game.getTeamScoreProperty(1).asString());
         t1ButtonActivated = new Pair[game.getTossups().size()];
         t2ButtonActivated = new Pair[game.getTossups().size()];
+        if(game.getTossups().size() > 0)
+        {
+            setChoiceBoxQuestions(game.getTossups().size());
+            questionsSet = true;
+        }
     }
 
     //Because there only ever should only be one controller, there shouldn't be an issue making this static.
@@ -90,30 +96,72 @@ public class GameController
         return numPoints;
     }
 
-
-
     @FXML
-    private void handleChangedQuestions()
+    private void handleChangedQuestion()
     {
-        int index = questionChoiceBox.getSelectionModel().getSelectedIndex();
-        setActiveQuestion(index);
+        int questionIndex = questionChoiceBox.getSelectionModel().getSelectedIndex();
+        int partIndex = questionPartChoiceBox.getSelectionModel().getSelectedIndex();
+        partIndex = partIndex == -1 ? 0 : partIndex; //Part index defaults to 0 if not selected
+        updateQuestionPartChoices(questionIndex);
+
+        Question question;
+        TossUpQuestion tossUp = game.getTossups().get(questionIndex);
+        if(partIndex > 0 && tossUp.hasBonus())
+        {
+            question = tossUp.getBonusQuestion().questionParts[partIndex - 1];
+        }
+        else
+        {
+            question = tossUp;
+            questionPartChoiceBox.getSelectionModel().select(0);
+        }
+
+        changeQuestion(question, questionIndex, partIndex);
     }
 
-    private void changeQuestion(int index)
+    private void changeQuestion(Question newQuestion, int tossupIndex, int partIndex) //All questions are either a tossup, or a bonus tied to a tossup
     {
-        setQuestionText(game.getBonuses().get(index).partBodies[0]);
-        setAnswerImage(game.getBonuses().get(index).partAnswers[0]);
-        questionChoiceBox.getSelectionModel().select(index); //Needed for when question is changed by game, rather than selection
-        updateButtons(index);
+        setQuestionText(newQuestion.getBody());
+        setAnswerImage(newQuestion.getAnswer());
+        questionChoiceBox.getSelectionModel().select(tossupIndex); //Needed for when question is changed by game, rather than selection
+        questionPartChoiceBox.getSelectionModel().select(partIndex); //Needed for when question is changed by game, rather than selection
+        updateButtons(tossupIndex);
     }
 
-    private void advancedQuestion()
+    private void advanceTossupQuestion()
     {
         int nextIndex = questionChoiceBox.getSelectionModel().getSelectedIndex() + 1;
-        if(game.getBonuses().size() > nextIndex)
+        if(game.getTossups().size() > nextIndex)
         {
-            changeQuestion(nextIndex);
+            changeQuestion(game.getTossups().get(nextIndex), nextIndex, 0);
         }
+    }
+
+    private void advanceNextPartOrQuestion() //Advances to the next part of the question if there is one, else advances to the next question
+    {
+        boolean couldAdvance = advanceNextQuestionPart();
+        if(!couldAdvance)
+        {
+            advanceTossupQuestion();
+        }
+    }
+
+    private boolean advanceNextQuestionPart() //Returns true if advance was successful, false otherwise.
+    {
+        boolean result;
+        int questionIndex = questionChoiceBox.getSelectionModel().getSelectedIndex();
+        int nextPartIndex = questionPartChoiceBox.getSelectionModel().getSelectedIndex() + 1;
+        if(questionPartChoiceBox.getItems().size() > nextPartIndex)
+        {
+            BonusQuestionPart nextPart = game.getTossups().get(questionIndex).getBonusQuestion().getPart(nextPartIndex - 1);
+            changeQuestion(nextPart, questionIndex, nextPartIndex);
+            result = true;
+        }
+        else
+        {
+            result = false;
+        }
+        return result;
     }
 
     public void handleContainerButtonClicked(ActionEvent e)
@@ -161,7 +209,7 @@ public class GameController
             updateButtons(questionIndex); //Need to update the buttons before the question is changed
             //TODO This seems like a bizarre use of timeline, but other methods don't work as expected (Sleeps, etc.)
             Timeline timeline = new Timeline(new KeyFrame(Duration.millis(SCREEN_TRANSITION_MILLISECONDS), event -> {
-                advancedQuestion();
+                advanceNextPartOrQuestion();
             }));
             timeline.setCycleCount(1);
             timeline.play();
@@ -263,6 +311,15 @@ public class GameController
         {
             System.err.println("Question already has two attempts. Editing questions currently not supported.");
         }
+
+        if(tossUp.isCorrectlyAnswered())
+        {
+            int nextBonusIndex = game.getNextBonusIndex();
+            tossUp.setBonusQuestion(game.getBonuses().get(nextBonusIndex), nextBonusIndex);
+            game.incrementNextBonusIndex();
+        }
+
+        updateQuestionPartChoices(questionIndex);
     }
 
     private void setQuestionText(String text)
@@ -275,7 +332,7 @@ public class GameController
         answerImageView.setImage(image);
     }
 
-    private void setNumQuestions(int numQuestions)
+    private void setChoiceBoxQuestions(int numQuestions)
     {
         ObservableList<String> list = FXCollections.observableArrayList();
         for(int i = 0; i < numQuestions; i++)
@@ -283,17 +340,32 @@ public class GameController
             list.add("Question " + (i + 1));
         }
         questionChoiceBox.setItems(list);
+        questionChoiceBox.getSelectionModel().select(0); //Select first question to start
+        updateQuestionPartChoices(0);
     }
 
-    public void setActiveQuestion(int index)
+    private void updateQuestionPartChoices(int questionIndex) //This currently also sets the selected index to 0
     {
-        if(questionsSet)
+        ObservableList<String> partChoices = FXCollections.observableArrayList();
+        partChoices.add("Toss Up");
+        if(game.getTossups().get(questionIndex).hasBonus())
         {
-            changeQuestion(index);
+            partChoices.add("Bonus Part A");
+            partChoices.add("Bonus Part B");
+            partChoices.add("Bonus Part C");
         }
-        else
-        {
-            System.err.println("Cannot change active questions, no questions have been added.");
-        }
+        questionPartChoiceBox.setItems(partChoices);
     }
+
+//    public void setActiveTossup(int index)
+//    {
+//        if(questionsSet)
+//        {
+//            changeQuestion(game.getTossups().get(index), index, 0);
+//        }
+//        else
+//        {
+//            System.err.println("Cannot change active questions, no questions have been added.");
+//        }
+//    }
 }

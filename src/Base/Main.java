@@ -37,7 +37,7 @@ public class Main extends Application {
 
         gController.loadGame(game);
         gController.initGuiElements();
-        gController.setActiveQuestion(0);
+        //gController.setActiveTossup(0);
 
         primaryStage.setTitle("Quiz Bowl Auto Score");
         primaryStage.setScene(new Scene(root, 1200, 600));

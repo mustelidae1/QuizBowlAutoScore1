@@ -9,6 +9,7 @@ public class Game
 {
     private ArrayList<TossUpQuestion> tossUps;
     private ArrayList<BonusQuestion> bonuses;
+    private int nextBonusIndex;
     private Team teamOne;
     private Team teamTwo;
     private IntegerProperty[] teamScoreProperties;
@@ -18,6 +19,7 @@ public class Game
     {
         tossUps = new ArrayList<>();
         bonuses = new ArrayList<>();
+        nextBonusIndex = 0;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
         this.completed = false;
@@ -54,6 +56,21 @@ public class Game
     public void setBonuses(ArrayList<BonusQuestion> bonuses)
     {
         this.bonuses = bonuses;
+    }
+
+    public void setNextBonusIndex(int index)
+    {
+        nextBonusIndex = index;
+    }
+
+    public void incrementNextBonusIndex()
+    {
+        nextBonusIndex++;
+    }
+
+    public int getNextBonusIndex()
+    {
+        return nextBonusIndex;
     }
 
     public Team getTeamOne()
