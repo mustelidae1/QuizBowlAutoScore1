@@ -27,11 +27,19 @@ public class Controller_Popup_TournamentInfo extends Controller {
     @FXML
     void next(ActionEvent event) throws IOException {
     	stats.setTournamentName(textField_tourneyName.getText()); 
-    	stats.setNumRooms(Integer.parseInt(textField_numRooms.getText()));
     	stats.setTournamentDate(textField_tourneyDate.getValue());
     	
-    	Stage curStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	changeScene("/GUI/Popup_TeamList.fxml", curStage); 
+    	try {
+    		int numRooms = Integer.parseInt(textField_numRooms.getText());
+    	    
+        	stats.setNumRooms(Integer.parseInt(textField_numRooms.getText()));
+        	
+        	Stage curStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        	changeScene("/GUI/Popup_TeamList.fxml", curStage); 
+    	} catch (NumberFormatException e) {
+    		textField_numRooms.setText("Please enter a valid number");
+    	}
+    	
     }
 
 }

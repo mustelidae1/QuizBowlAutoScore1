@@ -1,1 +1,83 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* 
+ * Good reference for JavaFX CSS: https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
+ */
+
+.root {
+	 -fx-accent: #FFA746;
+}
+
+.Style_DarkBackground {
+	-fx-background-color: #2D262E; 
+}
+
+.Style_LightBackground {
+	-fx-background-color: #554857;
+}
+
+.Style_Panel {
+	-fx-background-color: #554857; 
+	-fx-background-radius: 5; 
+}
+
+Text {
+	-fx-fill: white; 
+	-fx-font-family: system; 
+}
+
+.text-area {
+    -fx-font-size: 14; 
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: #7A687D;
+    -fx-focus-color: transparent; 
+}
+
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #A990AD;
+    -fx-focus-color: transparent;  
+}
+
+.date-picker {
+	-fx-focus-color: transparent; 
+}
+
+.text-field {
+	-fx-focus-color: cornflowerblue; 
+	-fx-background-color: lightgray; 
+}
+
+.text-area .content {
+	-fx-background-color: #F5EBF0; 
+	
+}
+
+.text-area {
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent; 
+}
+
+.button {
+	-fx-background-color:  #FFA746; 
+    -fx-background-radius: 5;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold; 
+    -fx-font-size: 14px; 
+}
+
+.button:hover {
+	-fx-background-color: #FF8F1A;
+}
+
+.menu-bar {
+	-fx-background-color: #F5EBF0; 
+}
+
+.context-menu {
+	-fx-background-color: #F5EBF0;
+}

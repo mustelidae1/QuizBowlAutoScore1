@@ -22,7 +22,8 @@ public class Controller_Popup_TeamList extends Controller {
     	// Get teams 
     	for (String line : textField_teams.getText().split("\\n")) {
     		if (line != null) {
-            	stats.addTeam(line);
+    			Team team = new Team(line); 
+            	stats.addTeam(team);
             	stats.setNumTeams(stats.getNumTeams()+1);
     		}
     	}

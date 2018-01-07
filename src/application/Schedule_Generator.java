@@ -10,7 +10,7 @@ public class Schedule_Generator {
 	String[][] schedule; 
 	int numRounds; 
 	
-	public Schedule_Generator(int numRooms, int numRounds, ArrayList<String> teams) {
+	public Schedule_Generator(int numRooms, int numRounds, ArrayList<Team> teams) {
 		schedule = new String[numRooms][numRounds];
 		this.numRounds = numRounds; 
 		
