@@ -46,6 +46,7 @@ public class Controller {
    		Scene newScene = new Scene(root); 
    		Stage newStage = new Stage(); 
    		newStage.setScene(newScene);
+   		newStage.setResizable(false);
    		newStage.initModality(Modality.APPLICATION_MODAL);
    		newStage.initOwner(curStage);
     		
@@ -94,6 +95,12 @@ public class Controller {
      * Called after stats have been loaded. 
      */
     public void loadData() {}
+    
+    /*
+     * For updating data once the page is already
+     * displayed. 
+     */ 
+    public void update() {}
     
     // ******* MAIN MENU BUTTON EVENT HANDLERS ***********// 
     

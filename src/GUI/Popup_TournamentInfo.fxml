@@ -6,15 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="application.Controller_Popup_TournamentInfo">
+<AnchorPane prefHeight="500.0" prefWidth="400.0" styleClass="Style_LightBackground" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller_Popup_TournamentInfo">
    <children>
       <TextField fx:id="textField_tourneyName" layoutX="54.0" layoutY="67.0" prefHeight="25.0" prefWidth="174.0" />
+       <DatePicker fx:id="textField_tourneyDate" layoutX="54.0" layoutY="143.0" />
       <TextField fx:id="textField_numRooms" layoutX="54.0" layoutY="219.0" prefHeight="25.0" prefWidth="174.0" />
-      <DatePicker fx:id="textField_tourneyDate" layoutX="54.0" layoutY="143.0" />
-      <Text layoutX="54.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tournament Name" />
-      <Text layoutX="54.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tournament Date" />
-      <Text layoutX="54.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Rooms" />
-      <Button fx:id="button_next" onAction="#next" layoutX="334.0" layoutY="449.0" mnemonicParsing="false" text="Next" />
+      <Text fill="WHITE" layoutX="54.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tournament Name" />
+      <Text fill="WHITE" layoutX="54.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tournament Date" />
+      <Text fill="WHITE" layoutX="54.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Rooms" />
+      <Button fx:id="button_next" layoutX="334.0" layoutY="449.0" mnemonicParsing="false" onAction="#next" text="Next" />
    </children>
 </AnchorPane>

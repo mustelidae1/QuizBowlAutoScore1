@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" styleClass="Style_LightBackground" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller_Round_Setup">
+   <children>
+      <Text fill="WHITE" layoutX="32.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Round 1 Setup">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Button fx:id="button_startRound" layoutX="276.0" layoutY="445.0" mnemonicParsing="false" onAction="#startRound" text="Start Round" />
+      <TextField fx:id="textField_team1player1" layoutX="24.0" layoutY="148.0" text="Player1" />
+      <TextField fx:id="textField_team1player2" layoutX="24.0" layoutY="186.0" text="Player2" />
+      <TextField fx:id="textField_team1player3" layoutX="24.0" layoutY="223.0" text="Player3" />
+      <TextField fx:id="textField_team1player4" layoutX="24.0" layoutY="261.0" text="Player4" />
+      <TextField fx:id="textField_team1player5" layoutX="24.0" layoutY="299.0" />
+      <TextField fx:id="textField_team1player6" layoutX="24.0" layoutY="337.0" />
+      <TextField fx:id="textField_team2player1" layoutX="227.0" layoutY="148.0" text="Player1" />
+      <TextField fx:id="textField_team2player2" layoutX="227.0" layoutY="187.0" text="Player2" />
+      <TextField fx:id="textField_team2player3" layoutX="227.0" layoutY="224.0" text="Player3" />
+      <TextField fx:id="textField_team2player4" layoutX="227.0" layoutY="262.0" text="Player4" />
+      <TextField fx:id="textField_team2player5" layoutX="227.0" layoutY="300.0" />
+      <TextField fx:id="textField_team2player6" layoutX="227.0" layoutY="338.0" />
+      <Text fill="WHITE" layoutX="187.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="vs.">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="comboBox_team1" layoutX="24.0" layoutY="100.0" onAction="#changeTeam1" prefWidth="150.0" promptText="Team1" />
+      <ComboBox fx:id="comboBox_team2" layoutX="227.0" layoutY="100.0" onAction="#changeTeam2" prefWidth="150.0" promptText="Team2" />
+   </children>
+</AnchorPane>
