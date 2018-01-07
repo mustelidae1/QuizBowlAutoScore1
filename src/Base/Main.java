@@ -33,6 +33,7 @@ public class Main extends Application {
         GameController gController = loader.getController();
         QuestionParser test = new QuestionParser("Packets/PDFQuestions.pdf");
         game.setTossUps(test.tossUps);
+        game.setBonuses(test.bonuses);
 
         gController.loadGame(game);
         gController.initGuiElements();
@@ -42,6 +43,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1200, 600));
         //primaryStage.getScene().getStylesheets().add(getClass().getResource("Game.css").toExternalForm());
         primaryStage.show();
+        XMLBuilder xBuilder = new XMLBuilder(game);
+        xBuilder.createGameXml("TestGame.xml");
     }
 
 

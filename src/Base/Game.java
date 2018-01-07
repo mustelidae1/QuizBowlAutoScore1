@@ -8,15 +8,19 @@ import java.util.ArrayList;
 public class Game
 {
     private ArrayList<TossUpQuestion> tossUps;
+    private ArrayList<BonusQuestion> bonuses;
     private Team teamOne;
     private Team teamTwo;
     private IntegerProperty[] teamScoreProperties;
+    private boolean completed;
 
     public Game(Team teamOne, Team teamTwo)
     {
-        tossUps = new ArrayList<>(); //Arbitrarily limiting to 50 questions.
+        tossUps = new ArrayList<>();
+        bonuses = new ArrayList<>();
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
+        this.completed = false;
         teamScoreProperties = new IntegerProperty[2];
         teamScoreProperties[0] = new SimpleIntegerProperty(0);
         teamScoreProperties[1] = new SimpleIntegerProperty(0);
@@ -42,6 +46,16 @@ public class Game
         this.tossUps = tossUps;
     }
 
+    public ArrayList<BonusQuestion> getBonuses()
+    {
+        return  bonuses;
+    }
+
+    public void setBonuses(ArrayList<BonusQuestion> bonuses)
+    {
+        this.bonuses = bonuses;
+    }
+
     public Team getTeamOne()
     {
         return teamOne;
@@ -50,5 +64,15 @@ public class Game
     public Team getTeamTwo()
     {
         return teamTwo;
+    }
+
+    public boolean isCompleted()
+    {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed)
+    {
+        this.completed = completed;
     }
 }

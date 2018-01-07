@@ -14,6 +14,16 @@ public class Team
         players = new ArrayList<>();
     }
 
+    public String getTeamName()
+    {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName)
+    {
+        this.teamName = teamName;
+    }
+
     public void addPlayer(Player player)
     {
         this.players.add(player);
@@ -28,5 +38,4 @@ public class Team
     {
         return players;
     }
-
 }

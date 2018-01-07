@@ -101,8 +101,8 @@ public class GameController
 
     private void changeQuestion(int index)
     {
-        setQuestionText(game.getTossups().get(index).getBody());
-        setAnswerImage(game.getTossups().get(index).getAnswer());
+        setQuestionText(game.getBonuses().get(index).partBodies[0]);
+        setAnswerImage(game.getBonuses().get(index).partAnswers[0]);
         questionChoiceBox.getSelectionModel().select(index); //Needed for when question is changed by game, rather than selection
         updateButtons(index);
     }
@@ -110,7 +110,7 @@ public class GameController
     private void advancedQuestion()
     {
         int nextIndex = questionChoiceBox.getSelectionModel().getSelectedIndex() + 1;
-        if(game.getTossups().size() > nextIndex)
+        if(game.getBonuses().size() > nextIndex)
         {
             changeQuestion(nextIndex);
         }
@@ -153,7 +153,7 @@ public class GameController
         activatedButtonList[questionIndex] = new Pair<>(containerIndex, buttonIndex);
 
         Enums.ATTEMPT_RESULT attemptResult = convertButtonIndexToResult(buttonIndex);
-        addQuestionAttempt(questionIndex, teamIndex, containerIndex, attemptResult);
+        addTossupAttempt(questionIndex, teamIndex, containerIndex, attemptResult);
         boolean isCorrect = Utility.answerResultToBoolean(attemptResult);
         if(isCorrect)
         {
@@ -244,7 +244,7 @@ public class GameController
         return  attemptResult;
     }
 
-    private void addQuestionAttempt(int questionIndex, int teamIndex, int playerIndex, Enums.ATTEMPT_RESULT result)
+    private void addTossupAttempt(int questionIndex, int teamIndex, int playerIndex, Enums.ATTEMPT_RESULT result)
     {
         TossUpQuestion tossUp = game.getTossups().get(questionIndex);
         if(tossUp.isAttempted() && tossUp.isCorrectlyAnswered())
