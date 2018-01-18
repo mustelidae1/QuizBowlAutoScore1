@@ -7,6 +7,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -25,11 +26,14 @@ public class GameController
 {
     private final int SCREEN_TRANSITION_MILLISECONDS = 200;
 
+    //Some of this probably could be moved to the HomeBuilder
     @FXML private TextArea questionText;
     @FXML private ImageView answerImageView;
     @FXML private ChoiceBox questionChoiceBox;
     @FXML private ChoiceBox questionPartChoiceBox;
     @FXML private BorderPane baseBorderPane;
+    @FXML private Button bonusCorrectButton;
+    @FXML private Button bonusIncorrectButton;
 
     public NumberBinding team1Score;
     public IntegerProperty team1Prop;
@@ -72,16 +76,17 @@ public class GameController
             setChoiceBoxQuestions(game.getTossups().size());
             questionsSet = true;
         }
+        setBonusButtonsVisibility(false);
     }
 
     //Because there only ever should only be one controller, there shouldn't be an issue making this static.
     public static void updateTeamScores()
     {
-        game.setTeamScoreProperty(0, getTeamTossupScore(0));
-        game.setTeamScoreProperty(1, getTeamTossupScore(1));
+        game.setTeamScoreProperty(0, getTeamTotalScore(0));
+        game.setTeamScoreProperty(1, getTeamTotalScore(1));
     }
 
-    private static int getTeamTossupScore(int teamIndex)
+    private static int getTeamTotalScore(int teamIndex)
     {
         int numPoints = 0;
         for(int i = 0; i < game.getTossups().size(); i++)
@@ -91,9 +96,28 @@ public class GameController
             if((attempt = question.getTeamAnswerAttempt(teamIndex)) != null)
             {
                numPoints += Utility.convertResultToPoints(attempt.attemptResult);
+               if(question.hasBonus())
+               {
+                   numPoints += getTossupBonusScore(question);
+               }
             }
         }
         return numPoints;
+    }
+
+    private static int getTossupBonusScore(TossUpQuestion tossUp)
+    {
+        int output = 0;
+        BonusQuestion bonus = tossUp.getBonusQuestion();
+        for(int i = 0; i < bonus.questionParts.length; i++)
+        {
+            BonusQuestionPart part = bonus.getPart(i);
+            if(part.isAttempted() && part.isCorrectlyAnswered())
+            {
+                output+=10;
+            }
+        }
+        return output;
     }
 
     @FXML
@@ -109,11 +133,13 @@ public class GameController
         if(partIndex > 0 && tossUp.hasBonus())
         {
             question = tossUp.getBonusQuestion().questionParts[partIndex - 1];
+            setBonusButtonsVisibility(true);
         }
         else
         {
             question = tossUp;
             questionPartChoiceBox.getSelectionModel().select(0);
+            setBonusButtonsVisibility(false);
         }
 
         changeQuestion(question, questionIndex, partIndex);
@@ -187,6 +213,28 @@ public class GameController
             teamIndex = 1;
         }
         processButtonActivation(buttonClicked, playerContainers, activatedButtonList, teamIndex);
+    }
+
+    @FXML ///TEMPORARY This will need to be moved out of fxml eventually
+    public void handleBonusButtonClicked(ActionEvent e)
+    {
+        Button buttonClicked = (Button) e.getSource();
+        int questionIndex = questionChoiceBox.getSelectionModel().getSelectedIndex();
+        int choiceIndex = questionPartChoiceBox.getSelectionModel().getSelectedIndex();
+        if(choiceIndex == 0) //TossUp Selected
+        {
+            System.err.println("ERROR! Bonus answer button clicked when tossup is selected.");
+        }
+        BonusQuestionPart bonusPart =  game.getTossups().get(questionIndex).getBonusQuestion().getPart(choiceIndex - 1);
+        if(buttonClicked == bonusCorrectButton)
+        {
+            bonusPart.setCorrectlyAnswered(true);
+        }
+        else
+        {
+            bonusPart.setCorrectlyAnswered(false);
+        }
+        advanceNextPartOrQuestion();
     }
 
     private void processButtonActivation(HomeBuilder.PlayerAnswerButton button,
@@ -355,6 +403,12 @@ public class GameController
             partChoices.add("Bonus Part C");
         }
         questionPartChoiceBox.setItems(partChoices);
+    }
+
+    private void setBonusButtonsVisibility(boolean visibility)
+    {
+        bonusCorrectButton.setVisible(visibility);
+        bonusIncorrectButton.setVisible(visibility);
     }
 
 //    public void setActiveTossup(int index)

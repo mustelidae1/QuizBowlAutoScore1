@@ -64,11 +64,17 @@ public abstract class Question
 
     protected void setCorrectlyAnswered(boolean correctlyAnswered)
     {
+        this.attempted = true;
+        this.correctlyAnswered = correctlyAnswered;
+    }
+
+    protected boolean getCorrectlyAnswered(boolean correctlyAnswered)
+    {
         if(isAttempted() == false)
         {
             throw new IllegalStateException("ERROR! Question has not yet been answered.");
         }
-        this.correctlyAnswered = correctlyAnswered;
+        return correctlyAnswered;
     }
 
 

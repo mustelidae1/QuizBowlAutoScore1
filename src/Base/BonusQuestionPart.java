@@ -8,4 +8,10 @@ public class BonusQuestionPart extends Question
     {
         super(body, answer);
     }
+
+    public void setCorrectlyAnswered(boolean answered)
+    {
+        super.setCorrectlyAnswered(answered);
+        GameController.updateTeamScores();
+    }
 }

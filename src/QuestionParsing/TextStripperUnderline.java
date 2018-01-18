@@ -9,9 +9,11 @@ import java.util.ArrayList;
 public class TextStripperUnderline extends PDFTextStripper
 {
     private final static String TARGET_ANSWER_TEXT = "answer:";
+
     private int answerMatchIndex;
     private int numCharsPrinted;
-    private boolean answerFound;
+    //private boolean answerStartFound;
+    private boolean answerEndFound;
     private int pageIndex = 0;
     private float startX;
     private float startY;
@@ -19,6 +21,10 @@ public class TextStripperUnderline extends PDFTextStripper
     private float answerHeight;
     private float pageHeight;
     private float previousY;
+    private int temPos = 0;
+    private char lastNonSpace;
+
+
     private ArrayList<AnswerPosition> answerPositions;
 
     private int tempCharCount;
@@ -33,16 +39,33 @@ public class TextStripperUnderline extends PDFTextStripper
         pageWidth = 0;
         answerHeight = 0;
         pageHeight = 0;
-        answerFound = false;
+        //answerStartFound = false;
+        answerEndFound = false;
         answerPositions = new ArrayList<>();
     }
 
     protected void processTextPosition( TextPosition text )
     {
-        if(answerFound)
+//        String tempMatch = "feet/inches";
+//        if(tempMatch.charAt(temPos) == text.getUnicode().charAt(0))
+//        {
+//            temPos++;
+//            if(temPos == tempMatch.length())
+//            {
+//                System.out.println("Stuff");
+//                temPos = 0;
+//            }
+//        }
+//        else
+//        {
+//            temPos = 0;
+//        }
+
+        if(answerEndFound)
         {
             answerPositions.add(new AnswerPosition(startX, startY, pageWidth, answerHeight, pageHeight, pageIndex));
-            answerFound = false;
+            //answerStartFound = false;
+            answerEndFound = false;
         }
 
         if(text.getUnicode().charAt(0) == TARGET_ANSWER_TEXT.charAt(answerMatchIndex))
@@ -63,7 +86,7 @@ public class TextStripperUnderline extends PDFTextStripper
                     pageIndex++;
                 }
                 previousY = startY;
-                answerFound = true;
+                answerEndFound = true;
                 answerMatchIndex = 0;
             }
         }
@@ -71,6 +94,22 @@ public class TextStripperUnderline extends PDFTextStripper
         {
             answerMatchIndex = 0;
         }
+
+//        if(text.getUnicode().charAt(0) != 160 && text.getUnicode().charAt(0) != 32)
+//        {
+//            if(text.getUnicode().charAt(0) != '<')
+//            {
+//                lastNonSpace = text.getUnicode().charAt(0);
+//            }
+//            else if(answerStartFound)
+//            {
+//                System.out.println("Last char: " + lastNonSpace);
+//            }
+//        }
+//        else
+//        {
+//
+//        }
         super.processTextPosition(text);
     }
 
