@@ -28,10 +28,14 @@ public class QuestionParser
 
     public QuestionParser(String filepath) throws FileNotFoundException, IOException
     {
+        this(new File(filepath));
+    }
+
+    public QuestionParser(File file) throws IOException
+    {
         tossUps = new ArrayList<>();
         bonuses = new ArrayList<>();
 
-        File file = new File(filepath);
         doc = PDDocument.load(file);
         underlineStripper = new TextStripperUnderline();
         String text = underlineStripper.getText(doc);

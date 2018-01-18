@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import Base.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +55,7 @@ public class Controller {
     	
     }
     
-    protected void changeScene(String scenePath, Stage curStage) throws IOException {
+    protected Controller changeScene(String scenePath, Stage curStage) throws IOException {
     	// Get FXML file 
     	FXMLLoader loader = new FXMLLoader(getClass().getResource(scenePath)); 
     	Parent root = loader.load();
@@ -67,7 +68,8 @@ public class Controller {
     	// Change the scene 
     	Scene newScene = new Scene(root); 
     	curStage.setScene(newScene);
-    	curStage.show(); 
+    	curStage.show();
+    	return controller;
     	
     }
     

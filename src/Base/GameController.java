@@ -22,7 +22,7 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameController
+public class GameController extends application.Controller
 {
     private final int SCREEN_TRANSITION_MILLISECONDS = 200;
 

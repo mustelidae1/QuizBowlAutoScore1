@@ -42,15 +42,15 @@ public class Controller_Popup_Packets extends Controller {
     		stats.addPacket(file);
     	}
     	// TODO: check that the pdf uploaded is a valid packet 
-    	if (listView_packets.getItems().size() == 0) { 
-    		Alert alert = new Alert(AlertType.ERROR); 
-    		alert.setTitle("No Packets"); 
-    		alert.setContentText("Please upload at least one packet.");
-    		alert.showAndWait(); 
-    	} else {
+//    	if (listView_packets.getItems().size() == 0) {
+//    		Alert alert = new Alert(AlertType.ERROR);
+//    		alert.setTitle("No Packets");
+//    		alert.setContentText("Please upload at least one packet.");
+//    		alert.showAndWait();
+//    	} else {
     		Stage curStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         	changeScene("/GUI/Popup_RoundSetup.fxml", curStage); 
-    	}
+//    	}
     	
     }
     

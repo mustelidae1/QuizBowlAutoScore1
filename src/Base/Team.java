@@ -38,4 +38,20 @@ public class Team
     {
         return players;
     }
+
+    // Added 1/6 -- OT
+    public boolean hasPlayer(String playerName) {
+        boolean retVal = false;
+        for (Player player : players) {
+            if (player.getName().equals(playerName)) {
+                retVal = true;
+            }
+        }
+        return retVal;
+    }
+
+    // Added 1/6 -- OT
+    public Player getPlayer(int index) {
+        return players.get(index);
+    }
 }

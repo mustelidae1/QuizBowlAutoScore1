@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Base.*;
+import QuestionParsing.QuestionParser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -132,7 +134,7 @@ public class Controller_Round_Setup extends Controller {
     }
 
     @FXML
-    void startRound(ActionEvent event) {
+    void startRound(ActionEvent event) throws IOException{
     	try {
     		// Create any nonexisting teams 
     		if (!stats.teamExists(comboBox_team1.getSelectionModel().getSelectedItem())) {
@@ -169,6 +171,16 @@ public class Controller_Round_Setup extends Controller {
         	stats.setCurrentTeam1(stats.getTeam(team1));
         	stats.setCurrentTeam2(stats.getTeam(team2));
         	stats.setCurrentRound(stats.getCurrentRound() + 1);
+
+			Game game = new Game(stats.getTeam(0), stats.getTeam(1));
+			Stage curStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			GameController gController = (Base.GameController) changeScene("/Base/game.fxml", curStage); //LOL TODO: Fix this
+			QuestionParser test = new QuestionParser(stats.getPacket(stats.getCurrentRound() - 1));
+			game.setTossUps(test.tossUps);
+			game.setBonuses(test.bonuses);
+
+			gController.loadGame(game);
+			gController.initGuiElements();
         	
         	// TODO: change the scene 
         	
