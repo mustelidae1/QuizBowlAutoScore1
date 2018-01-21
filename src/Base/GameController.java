@@ -9,9 +9,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -29,11 +31,15 @@ public class GameController extends application.Controller
     //Some of this probably could be moved to the HomeBuilder
     @FXML private TextArea questionText;
     @FXML private ImageView answerImageView;
-    @FXML private ChoiceBox questionChoiceBox;
-    @FXML private ChoiceBox questionPartChoiceBox;
+    @FXML private ChoiceBox<String> questionChoiceBox;
+    @FXML private ChoiceBox<String> questionPartChoiceBox;
     @FXML private BorderPane baseBorderPane;
     @FXML private Button bonusCorrectButton;
     @FXML private Button bonusIncorrectButton;
+    @FXML private Label team1Name;  
+    @FXML private Label team2Name; 
+    @FXML private AnchorPane scorePane1; 
+    @FXML private AnchorPane scorePane2; 
 
     public NumberBinding team1Score;
     public IntegerProperty team1Prop;
@@ -66,7 +72,7 @@ public class GameController extends application.Controller
     public void initGuiElements()
     {
         homeBuilder = new HomeBuilder(game, this);
-        homeBuilder.initHome(baseBorderPane);
+        homeBuilder.initHome(baseBorderPane, scorePane1, scorePane2);
         homeBuilder.getTeam1ScoreLabel().textProperty().bind(game.getTeamScoreProperty(0).asString());
         homeBuilder.getTeam2ScoreLabel().textProperty().bind(game.getTeamScoreProperty(1).asString());
         t1ButtonActivated = new Pair[game.getTossups().size()];
@@ -77,6 +83,11 @@ public class GameController extends application.Controller
             questionsSet = true;
         }
         setBonusButtonsVisibility(false);
+        
+        // OT 1/18 
+        team1Name.setText(stats.getCurrentTeam1().getTeamName());
+        team2Name.setText(stats.getCurrentTeam2().getTeamName());
+        
     }
 
     //Because there only ever should only be one controller, there shouldn't be an issue making this static.

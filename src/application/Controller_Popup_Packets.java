@@ -38,21 +38,27 @@ public class Controller_Popup_Packets extends Controller {
     
     @FXML
     void next(ActionEvent event) throws IOException {
+    	
+    	// This stuff is just here so I don't drive myself crazy uploading packets 
+    	//File file1 = new File("Packets/PDFQuestions.pdf"); 
+    	//filesList.add(file1); 
+    	//listView_packets.getItems().add(file1.getName()); 
+    	// Remove later
+    	
     	for (File file : filesList) {
     		stats.addPacket(file);
     	}
     	// TODO: check that the pdf uploaded is a valid packet 
-//    	if (listView_packets.getItems().size() == 0) {
-//    		Alert alert = new Alert(AlertType.ERROR);
-//    		alert.setTitle("No Packets");
-//    		alert.setContentText("Please upload at least one packet.");
-//    		alert.showAndWait();
-//    	} else {
+    	if (listView_packets.getItems().size() == 0) {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("No Packets");
+    		alert.setContentText("Please upload at least one packet.");
+    		alert.showAndWait();
+    	} else {
     		Stage curStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        	changeScene("/GUI/Popup_RoundSetup.fxml", curStage); 
-//    	}
+    		changeScene("/GUI/Popup_RoundSetup.fxml", curStage);     	}
     	
-    }
+    	}
     
     @FXML 
     void uploadPacket(ActionEvent event) {

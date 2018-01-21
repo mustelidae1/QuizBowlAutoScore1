@@ -1,11 +1,14 @@
 package Base;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -37,7 +40,7 @@ public class HomeBuilder
         populatePlayerContainers(game.getTeamTwo(), t2PlayerContainers);
     }
 
-    public void initHome(BorderPane baseBorderPane)
+    public void initHome(BorderPane baseBorderPane, AnchorPane scorePane1, AnchorPane scorePane2)
     {
         this.baseBorderPane = baseBorderPane;
 
@@ -46,8 +49,15 @@ public class HomeBuilder
         team2ScoreLabel = new Label();
         team1ScoreLabel.setFont(new Font("Arial", 20));
         team2ScoreLabel.setFont(new Font("Arial", 20));
-        topGrid.add(team1ScoreLabel, 0, 1);
-        topGrid.add(team2ScoreLabel, 2, 1);
+        
+        //AnchorPane scorePane1 = (AnchorPane)getFromGridPane(topGrid, 0,0); 
+        //AnchorPane scorePane2 = (AnchorPane)getFromGridPane(topGrid,0,2); 
+        
+        
+        scorePane1.getChildren().add(team1ScoreLabel); 
+        scorePane1.setRightAnchor(team1ScoreLabel, 5.0);
+        scorePane2.getChildren().add(team2ScoreLabel); 
+        scorePane2.setRightAnchor(team2ScoreLabel, 5.0);
 
         VBox leftVBox = (VBox) baseBorderPane.getLeft();
         VBox rightVBox = (VBox) baseBorderPane.getRight();
@@ -59,6 +69,20 @@ public class HomeBuilder
         {
             rightVBox.getChildren().add(playerContainer);
         }
+    }
+    
+    private Node getFromGridPane(GridPane grid, int row, int col) {
+    	Node result = null;
+        ObservableList<Node> children = grid.getChildren();
+
+        for (Node node : children) {
+            if(GridPane.getRowIndex(grid) == row && GridPane.getRowIndex(grid) == col) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
     }
 
     private void populatePlayerContainers(Team team, PlayerContainer[] containers)
@@ -104,17 +128,20 @@ public class HomeBuilder
         {
             super();
             answerButtons = new PlayerAnswerButton[NUM_ANSWER_BUTTONS];
-            getChildren().add(new TextField(name));
+            TextField text = new TextField(name); 
+            text.setEditable(false);
+            getChildren().add(text);
             getChildren().add(createButtonContainer());
         }
 
         private HBox createButtonContainer()
         {
             HBox output = new HBox();
-            PlayerAnswerButton powerButton = new PlayerAnswerButton("Power", "008800");
-            PlayerAnswerButton correctButton = new PlayerAnswerButton("Correct", "008800");
-            PlayerAnswerButton incorrectButton = new PlayerAnswerButton("Incorrect", "CF2D1F");
-            PlayerAnswerButton negativeButton = new PlayerAnswerButton("Negative", "CF2D1F");
+            output.setSpacing(50);
+            PlayerAnswerButton powerButton = new PlayerAnswerButton("++", "008800");  // Was Power
+            PlayerAnswerButton correctButton = new PlayerAnswerButton("+", "008800");  // Was Correct
+            PlayerAnswerButton incorrectButton = new PlayerAnswerButton("o", "CF2D1F");  // Was Incorrect
+            PlayerAnswerButton negativeButton = new PlayerAnswerButton("--", "CF2D1F"); // Was Negative
 
             answerButtons[0] = powerButton;
             answerButtons[1] = correctButton;

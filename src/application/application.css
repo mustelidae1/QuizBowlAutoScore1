@@ -24,6 +24,10 @@ Text {
 	-fx-font-family: system; 
 }
 
+.label {
+	-fx-text-fill: white; 
+}
+
 .text-area {
     -fx-font-size: 14; 
 }
@@ -80,4 +84,8 @@ Text {
 
 .context-menu {
 	-fx-background-color: #F5EBF0;
+}
+
+.choice-box .label {
+	-fx-text-fill: black; 
 }

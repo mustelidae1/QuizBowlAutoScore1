@@ -68,6 +68,7 @@ public class Controller {
     	// Change the scene 
     	Scene newScene = new Scene(root); 
     	curStage.setScene(newScene);
+    	newScene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
     	curStage.show();
     	return controller;
     	
