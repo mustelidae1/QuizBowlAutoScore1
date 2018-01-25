@@ -14,11 +14,13 @@ public class TextStripperUnderline extends PDFTextStripper
 
     private int answerMatchIndex;
     private int numCharsPrinted;
-    private boolean tossUpAnswerStartFound;
-    private boolean tossUpAnswerEndFound;
+    private boolean termStringFound;
+    private boolean answerStartFound;
+    private boolean answerEndFound;
     private boolean bonusAnswerFound;
     private int numAnswersFound;
     private int pageIndex = 0;
+    private int answerTermMatchIndex;
     private float startX;
     private float startY;
     private float pageWidth;
@@ -36,14 +38,16 @@ public class TextStripperUnderline extends PDFTextStripper
     {
         super();
         answerMatchIndex = 0;
+        answerTermMatchIndex = 0;
         numCharsPrinted = 0;
         startX = 0;
         startY = 0;
         pageWidth = 0;
         answerHeight = 0;
         pageHeight = 0;
-        tossUpAnswerStartFound = false;
-        tossUpAnswerEndFound = false;
+        answerStartFound = false;
+        answerEndFound = false;
+        termStringFound = false;
         answerPositions = new ArrayList<>();
     }
 
@@ -51,25 +55,34 @@ public class TextStripperUnderline extends PDFTextStripper
     {
         if(numAnswersFound < NUM_TOSSUPS)
         {
-            tossUpProcessTextPosition(text);
+            processTextPosition(text, "<");
+        }
+        else if(numAnswersFound % 3 == 0)
+        {
+            processTextPosition(text, "B.");
+        }
+        else if(numAnswersFound % 3 == 1)
+        {
+            processTextPosition(text, "C.");
         }
         else
         {
-            bonusProcessTextPosition(text);
+            processTextPosition(text, "<");
         }
     }
 
-    private void tossUpProcessTextPosition( TextPosition text )
+    private void processTextPosition(TextPosition text, String answerTermString)
     {
-        if(tossUpAnswerEndFound)
+        if(answerEndFound)
         {
             answerPositions.add(new AnswerPosition(startX, startY, pageWidth, answerHeight, pageHeight, pageIndex));
-            tossUpAnswerStartFound = false;
-            tossUpAnswerEndFound = false;
+            answerStartFound = false;
+            answerEndFound = false;
+            answerTermMatchIndex = 0;
             numAnswersFound++;
         }
 
-        if(!tossUpAnswerStartFound && (text.getUnicode().charAt(0) == TARGET_ANSWER_TEXT.charAt(answerMatchIndex)) )
+        if(!answerStartFound && (text.getUnicode().charAt(0) == TARGET_ANSWER_TEXT.charAt(answerMatchIndex)) )
         {
             if(answerMatchIndex == 0)
             {
@@ -87,7 +100,7 @@ public class TextStripperUnderline extends PDFTextStripper
                     pageIndex++;
                 }
                 previousY = startY;
-                tossUpAnswerStartFound = true;
+                answerStartFound = true;
                 answerMatchIndex = 0;
             }
         }
@@ -96,13 +109,27 @@ public class TextStripperUnderline extends PDFTextStripper
             answerMatchIndex = 0;
         }
 
-        if(text.getUnicode().charAt(0) != 160 && text.getUnicode().charAt(0) != 32)
+        if(text.getUnicode().charAt(0) == answerTermString.charAt(answerTermMatchIndex))
         {
-            if(text.getUnicode().charAt(0) != '<')
+            answerTermMatchIndex++;
+        }
+        else
+        {
+            answerTermMatchIndex = 0;
+        }
+        if(answerTermMatchIndex == answerTermString.length())
+        {
+            answerEndFound = true;
+        }
+
+
+        if(text.getUnicode().charAt(0) != 160 && text.getUnicode().charAt(0) != 32) //Dont' worry about spaces
+        {
+            if(!answerEndFound && answerTermMatchIndex == 0) //For multi character terminators, don't include parts of terminator
             {
                 lastNonSpace = text;
             }
-            else if(tossUpAnswerStartFound)
+            else if(answerStartFound)
             {
                 System.out.println("Last char: " + lastNonSpace.getUnicode());
                 double yDifference =  Math.abs(startY - lastNonSpace.getY());
@@ -111,48 +138,8 @@ public class TextStripperUnderline extends PDFTextStripper
                     answerHeight += yDifference;
                     startY = lastNonSpace.getY();
                 }
-                tossUpAnswerEndFound = true;
             }
         }
-        super.processTextPosition(text);
-    }
-
-    private void bonusProcessTextPosition(TextPosition text)
-    {
-        if(bonusAnswerFound)
-        {
-            answerPositions.add(new AnswerPosition(startX, startY, pageWidth, answerHeight, pageHeight, pageIndex));
-            bonusAnswerFound = false;
-            numAnswersFound++;
-        }
-
-        if(text.getUnicode().charAt(0) == TARGET_ANSWER_TEXT.charAt(answerMatchIndex))
-        {
-            if(answerMatchIndex == 0)
-            {
-                startX = text.getX();
-                startY = text.getY();
-                pageWidth = text.getPageWidth();
-                answerHeight = text.getHeight();
-                pageHeight = text.getPageHeight();
-            }
-            answerMatchIndex++;
-            if(answerMatchIndex == TARGET_ANSWER_TEXT.length()) //Finished a complete match
-            {
-                if(startY < previousY) //Semi-hacky way of determining if New page
-                {
-                    pageIndex++;
-                }
-                previousY = startY;
-                bonusAnswerFound = true;
-                answerMatchIndex = 0;
-            }
-        }
-        else
-        {
-            answerMatchIndex = 0;
-        }
-
         super.processTextPosition(text);
     }
 
