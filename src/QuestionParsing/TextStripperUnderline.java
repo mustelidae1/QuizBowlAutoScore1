@@ -43,6 +43,7 @@ public class TextStripperUnderline extends PDFTextStripper
         pageHeight = 0;
         answerStartFound = false;
         answerEndFound = false;
+
         answerPositions = new ArrayList<>();
     }
 
