@@ -86,7 +86,6 @@ public class QuestionParser
                 nextBonusEnd = nextBonusEnd == -1 ? trimmedText.length() : nextBonusEnd; //Set to end of text if next question not found
                 String bonusString = trimmedText.substring(nextBonusLocation, nextBonusEnd);
                 String[] questionParts = getBonusParts(bonusString);
-                System.out.println("I value:" + i);
                 Image[] answerParts = getBonusImages(i - 1);
 
                 BonusQuestion bonus = new BonusQuestion(questionParts, answerParts);
@@ -106,7 +105,7 @@ public class QuestionParser
             int partStart = bonusText.toLowerCase().indexOf(identifier);
             partStart = (i == 0) ? 0 : partStart; //Part starts at 0 for first question
             int partEnd = bonusText.toLowerCase().indexOf("answer:");
-            output[i] = bonusText.substring(partStart, partEnd);
+            output[i] = Utility.stripExtraWhitespace(bonusText.substring(partStart, partEnd));
             bonusText = bonusText.substring(partEnd + 7, bonusText.length()); //Trim up to and including occurrence of "answer: "
         }
 

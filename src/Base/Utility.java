@@ -11,7 +11,7 @@ public class Utility
     public static String stripExtraWhitespace(String s)
     {
         Character c = (char)160;
-        s = s.replaceAll("\n|\r", "");
+        s = s.replaceAll("\n|\r|\t", "");
         s = s.replace(c.toString(), " ");
         return s;
     }

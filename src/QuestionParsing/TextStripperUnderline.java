@@ -13,11 +13,8 @@ public class TextStripperUnderline extends PDFTextStripper
     private final static int MAX_SINGLE_LINE_Y_DIFF = 10; //The amount of variation allowed in Y coordinates before a word is considered to be on a separate line.
 
     private int answerMatchIndex;
-    private int numCharsPrinted;
-    private boolean termStringFound;
     private boolean answerStartFound;
     private boolean answerEndFound;
-    private boolean bonusAnswerFound;
     private int numAnswersFound;
     private int pageIndex = 0;
     private int answerTermMatchIndex;
@@ -39,7 +36,6 @@ public class TextStripperUnderline extends PDFTextStripper
         super();
         answerMatchIndex = 0;
         answerTermMatchIndex = 0;
-        numCharsPrinted = 0;
         startX = 0;
         startY = 0;
         pageWidth = 0;
@@ -47,7 +43,6 @@ public class TextStripperUnderline extends PDFTextStripper
         pageHeight = 0;
         answerStartFound = false;
         answerEndFound = false;
-        termStringFound = false;
         answerPositions = new ArrayList<>();
     }
 
