@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class QuestionParser
 {
+    private final static double LINE_HEIGHT_INCREASE = 6.0;
+
     public ArrayList<TossUpQuestion> tossUps;
     public ArrayList<BonusQuestion> bonuses;
     private static TextStripperUnderline underlineStripper;
@@ -86,6 +88,7 @@ public class QuestionParser
                 nextBonusEnd = nextBonusEnd == -1 ? trimmedText.length() : nextBonusEnd; //Set to end of text if next question not found
                 String bonusString = trimmedText.substring(nextBonusLocation, nextBonusEnd);
                 String[] questionParts = getBonusParts(bonusString);
+                System.out.println("I value:" + i);
                 Image[] answerParts = getBonusImages(i - 1);
 
                 BonusQuestion bonus = new BonusQuestion(questionParts, answerParts);
@@ -135,7 +138,7 @@ public class QuestionParser
         AnswerPosition pos = underlineStripper.getAnswerPositions().get(index);
 
         PDPage page = doc.getPage(pos.getPageIndex());
-        page.setCropBox(new PDRectangle(pos.getStartX(), pos.getBottomToTopY() - 3, pos.getPageWidth(), (int) (pos.getAnswerHeight() * 2)));
+        page.setCropBox(new PDRectangle(pos.getStartX(), pos.getBottomToTopY() - 3, pos.getPageWidth(), (int) (pos.getAnswerHeight() + LINE_HEIGHT_INCREASE)));
 
         PDDocument croppedDocument = new PDDocument();
         croppedDocument.addPage(page);

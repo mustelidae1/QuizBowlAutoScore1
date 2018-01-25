@@ -85,9 +85,11 @@ public class GameController extends application.Controller
         setBonusButtonsVisibility(false);
         
         // OT 1/18 
-        team1Name.setText(stats.getCurrentTeam1().getTeamName());
-        team2Name.setText(stats.getCurrentTeam2().getTeamName());
-        
+//        team1Name.setText(stats.getCurrentTeam1().getTeamName());
+//        team2Name.setText(stats.getCurrentTeam2().getTeamName());
+        team1Name.setText("Team 1");
+        team2Name.setText("Team 2");
+
     }
 
     //Because there only ever should only be one controller, there shouldn't be an issue making this static.
