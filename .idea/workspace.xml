@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b09a3bb3-1d0d-4ea4-bede-3036f968c965" name="Default" comment="Added bonus support to questions, have not adjusted GUI or scoring to reflect bonuses.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Packets/PACEPacket.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Base/GameController.java" afterPath="$PROJECT_DIR$/src/Base/GameController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/QuestionParsing/QuestionParser.java" afterPath="$PROJECT_DIR$/src/QuestionParsing/QuestionParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/QuestionParsing/TextStripperUnderline.java" afterPath="$PROJECT_DIR$/src/QuestionParsing/TextStripperUnderline.java" />
     </list>
@@ -33,44 +33,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuestionParser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Base/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="33" column="70" lean-forward="false" selection-start-line="33" selection-start-column="70" selection-end-line="33" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuestionParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/QuestionParsing/QuestionParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+            <state relative-caret-position="-289">
+              <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignatureParser.class" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar!/sun/reflect/generics/parser/SignatureParser.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextStripperUnderline.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TextStripperUnderline.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/QuestionParsing/TextStripperUnderline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="110" column="48" lean-forward="true" selection-start-line="110" selection-start-column="48" selection-end-line="110" selection-end-column="48" />
+            <state relative-caret-position="1232">
+              <caret line="144" column="0" lean-forward="true" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
               <folding>
-                <element signature="e#5014#5015#0" expanded="true" />
-                <element signature="e#5057#5058#0" expanded="true" />
+                <element signature="e#4524#4525#0" expanded="true" />
+                <element signature="e#4567#4568#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,7 +106,6 @@
         <option value="$PROJECT_DIR$/src/Base/Player.java" />
         <option value="$PROJECT_DIR$/src/Base/Game.java" />
         <option value="$PROJECT_DIR$/src/Base/TossUpQuestion.java" />
-        <option value="$PROJECT_DIR$/src/Base/Main.java" />
         <option value="$PROJECT_DIR$/src/Base/game.fxml" />
         <option value="$PROJECT_DIR$/src/Base/Question.java" />
         <option value="$PROJECT_DIR$/src/Base/BonusQuestion.java" />
@@ -132,6 +121,7 @@
         <option value="$PROJECT_DIR$/src/application/Controller_Round_Setup.java" />
         <option value="$PROJECT_DIR$/src/Base/GameController.java" />
         <option value="$PROJECT_DIR$/src/QuestionParsing/QuestionParser.java" />
+        <option value="$PROJECT_DIR$/src/Base/Main.java" />
         <option value="$PROJECT_DIR$/src/QuestionParsing/TextStripperUnderline.java" />
       </list>
     </option>
@@ -212,14 +202,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo\src" />
-      <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo\src\QuestionParsing" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo\Packets" />
       <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo" />
       <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo\bin" />
       <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo\src\Base" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo\src" />
+      <recent name="C:\Users\CalebsLaptop\IdeaProjects\QuizBowlAutoScoreRepo\src\QuestionParsing" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -405,10 +396,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42869000" />
+    <option name="totallyTimeSpent" value="46239000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -430,7 +422,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3997879" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3997879" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -507,7 +499,7 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <breakpoint type="java-exception">
+        <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.StringIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="12" />
         </breakpoint>
@@ -515,7 +507,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="57" />
+      <option name="time" value="61" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -575,6 +567,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
           <caret line="73" column="9" lean-forward="true" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -635,6 +630,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="365">
           <caret line="73" column="9" lean-forward="false" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -729,21 +727,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10302">
-          <caret line="657" column="0" lean-forward="false" selection-start-line="657" selection-start-column="0" selection-end-line="657" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Base/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
           <caret line="40" column="42" lean-forward="false" selection-start-line="40" selection-start-column="37" selection-end-line="40" selection-end-column="42" />
           <folding>
-            <element signature="e#1170#1171#0" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
+            <element signature="e#1170#1171#0" expanded="false" />
+            <element signature="e#1201#1202#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -813,14 +803,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Base/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="38" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Base/HomeBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -868,14 +850,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Base/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
@@ -892,22 +866,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/QuestionParsing/TextStripperUnderline.java">
+    <entry file="file://$PROJECT_DIR$/src/Base/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="110" column="48" lean-forward="true" selection-start-line="110" selection-start-column="48" selection-end-line="110" selection-end-column="48" />
-          <folding>
-            <element signature="e#5014#5015#0" expanded="true" />
-            <element signature="e#5057#5058#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="476">
+          <caret line="33" column="70" lean-forward="false" selection-start-line="33" selection-start-column="70" selection-end-line="33" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="1959" column="0" lean-forward="false" selection-start-line="1959" selection-start-column="0" selection-end-line="1959" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/QuestionParsing/QuestionParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+        <state relative-caret-position="-289">
+          <caret line="20" column="64" lean-forward="false" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/QuestionParsing/TextStripperUnderline.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1232">
+          <caret line="144" column="0" lean-forward="true" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+          <folding>
+            <element signature="e#4524#4525#0" expanded="true" />
+            <element signature="e#4567#4568#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

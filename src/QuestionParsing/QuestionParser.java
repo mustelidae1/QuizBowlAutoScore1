@@ -8,10 +8,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
-import javax.print.DocFlavor;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +18,7 @@ import java.util.ArrayList;
 public class QuestionParser
 {
     private final static double LINE_HEIGHT_INCREASE = 6.0;
+    private final static String ANSWER_IDENTIFIER_TEXT = "answer:";
 
     public ArrayList<TossUpQuestion> tossUps;
     public ArrayList<BonusQuestion> bonuses;
@@ -61,7 +59,7 @@ public class QuestionParser
             }
             else
             {
-                int nextQuestionEnd = text.indexOf("answer:", nextQuestionLocation); //TODO: Support capitalization
+                int nextQuestionEnd = text.indexOf(ANSWER_IDENTIFIER_TEXT, nextQuestionLocation); //TODO: Support capitalization
                 String questionString = text.substring(nextQuestionLocation, nextQuestionEnd);
                 questionString = Utility.stripExtraWhitespace(questionString);
                 questionList.add(new TossUpQuestion(questionString, getAnswerImage(i - 1)));
